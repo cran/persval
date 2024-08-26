@@ -1,0 +1,17 @@
+55bf600fe5cad76d731790f8495856be *DESCRIPTION
+5cf53ca799971453cdeb6c2abb02a346 *NAMESPACE
+0b3674569f40c0511de21e51bef8fce4 *NEWS.md
+b7c1b32d65280cc5792507d2101889e6 *R/persval-package.R
+f14eae2f8f009fb95b863fee917d5865 *R/pvq21.R
+76b169097efe9ff2e83762864ed23f2b *R/pvq40.R
+da1eef741d48bbb408fc4d8d62c6529a *R/svs.R
+09bba611f788824a2b484a95dccaf3e3 *R/tivi.R
+ddc06f7306f15961985b3d62ac062909 *R/twivi.R
+7e6b17bc1d10495559f107018ff14eca *R/zzz.R
+29c07f918369d144764f3298ce2657ea *inst/WORDLIST
+d0f8df9e6b5b67aae6c18c45eff75b82 *man/persval.Rd
+be4cc5ae63a30d0522a30a7465fe5f73 *man/pvq21.Rd
+c973f6e5ffebfe65ccc1ffb238df93a6 *man/pvq40.Rd
+a40f13928342205767d0d29ae380dd09 *man/svs.Rd
+33b18ed41b5b31d00da9cc5ec2f107f5 *man/tivi.Rd
+174443e88903cbccbb81e7b5ffdee8d7 *man/twivi.Rd
