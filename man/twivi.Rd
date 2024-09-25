@@ -4,14 +4,28 @@
 \alias{twivi}
 \title{Compute personal values from TwIVI data}
 \usage{
-twivi(df, items = NULL, compute = "all", correction = TRUE, na.rm = TRUE)
+twivi(
+  df,
+  items = NULL,
+  compute = "all",
+  correction = TRUE,
+  na.rm = TRUE
+)
 }
 \arguments{
 \item{df}{A Data frame containing the raw responses for the 20 TwIVI items. If "items" is not provided, it must have exactly 20 columns, and their order must correspond to the TwIVI items.}
 
 \item{items}{An optional vector containing the names or indices of the columns that correspond to the TwIVI items. Must be exactly 20 items. If NULL, the function assumes the items are the only columns given in the "df" parameter.}
 
-\item{compute}{Character. Indicates which personal values scores to compute and return. Possible values are "all" (default), "ten.values", "four.higher", "two.foci", or "two.dynamics".}
+\item{compute}{Character. Indicates which personal values scores to compute and return.
+Possible values are "all" (default; computes all first and second-order personal values scores),
+"ten.values" (computes the ten basic personal values scores),
+ "four.higher" (computes the four main higher-order values scores),
+ "two.foci" (computes two higher-order values scores: self-focused values that regulate personal interests and characteristics, and
+    other-focused values that regulate social relationships),
+    "two.anxiety" (computes two higher-order values based on their relation to anxiety:
+    self-protective values aimed at coping with anxiety due to uncertainty in the social and physical world, and
+    growth-oriented or self-expansive values that express anxiety-free motivations).}
 
 \item{correction}{Logical. When TRUE, the scores are corrected for individual differences in the use of the response scale. Default is TRUE.}
 
@@ -25,7 +39,7 @@ This function computes personal values scores and different higher-order
 dimensions related to Schwartz's theoretical framework based on the 20 items
 of the TwIVI Questionnaire (Sandy et al., 2017).
 By default, the function applies the recommended statistical adjustment
-(individual MRAT centering) as suggested by the authors, to correct for
+(MRAT centering) as suggested by the authors, to correct for
 individual differences in response styles thus enhancing the interpretative
 validity of the scores.
 }
@@ -38,8 +52,7 @@ twivi1 = c(3, 1, 4), twivi2 = c(2, 5, 3), twivi3 = c(1, 5, 2), twivi4 = c(4, 3, 
 twivi5 = c(5, 2, 1), twivi6 = c(3, 4, 2), twivi7 = c(1, 2, 4), twivi8 = c(3, 1, 5),
 twivi9 = c(2, 4, 1), twivi10 = c(5, 3, 2), twivi11 = c(1, 4, 3), twivi12 = c(2, 1, 5),
 twivi13 = c(3, 5, 4), twivi14 = c(1, 2, 3), twivi15 = c(4, 5, 1), twivi16 = c(2, 3, 4),
-twivi17 = c(5, 1, 2), twivi18 = c(3, 4, 1), twivi19 = c(2, 3, NA), twivi20 = c(1, 3, 4)
-),
+twivi17 = c(5, 1, 2), twivi18 = c(3, 4, 1), twivi19 = c(2, 3, NA), twivi20 = c(1, 3, 4)),
 correction = TRUE,
 compute = "all",
 na.rm = TRUE)

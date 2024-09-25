@@ -4,9 +4,18 @@
 #' dimensions related to Schwartz's theoretical framework based on the 57 items
 #' of the Schwartz Value Survey (Schwartz, 1992).
 #' By default, the function applies the recommended statistical adjustment
-#' (individual MRAT centering) as suggested by the authors, to correct for
+#' (MRAT centering) as suggested by the authors, to correct for
 #' individual differences in response styles thus enhancing the interpretative
 #' validity of the scores.
+#'
+#' @usage
+#' svs(
+#'   df,
+#'   items = NULL,
+#'   compute = "all",
+#'   correction = TRUE,
+#'   na.rm = TRUE
+#' )
 #'
 #' @param df A data frame containing the raw responses for the SVS items.
 #'           If "items" is not provided, it must have exactly 57 columns, and their order must
@@ -17,8 +26,14 @@
 #' @param correction Logical. When TRUE, the scores are corrected for individual differences
 #'                   in the use of the response scale. Default is TRUE.
 #' @param compute Character. Indicates which personal values scores to compute and return.
-#'                Possible values are "all" (default), "ten.values", "four.higher", "two.foci",
-#'                or "two.dynamics".
+#'                Possible values are "all" (default; computes all first and second-order personal values scores),
+#'                "ten.values" (computes the ten basic personal values scores),
+#'                 "four.higher" (computes the four main higher-order values scores),
+#'                 "two.foci" (computes two higher-order values scores: self-focused values that regulate personal interests and characteristics, and
+#'                    other-focused values that regulate social relationships),
+#'                    "two.anxiety" (computes two higher-order values based on their relation to anxiety:
+#'                    self-protective values aimed at coping with anxiety due to uncertainty in the social and physical world, and
+#'                    growth-oriented or self-expansive values that express anxiety-free motivations).
 #' @param na.rm Logical. When TRUE, NAs are ignored in calculations; when FALSE,
 #'              NAs are preserved and will affect calculations. Default is TRUE.
 #'
@@ -43,8 +58,7 @@
 #'   svs45 = c(3, 2, 4), svs46 = c(1, 5, 3), svs47 = c(4, 3, 2), svs48 = c(5, 1, 2),
 #'   svs49 = c(3, 4, 1), svs50 = c(2, 5, NA), svs51 = c(1, 4, 3), svs52 = c(2, 1, 5),
 #'   svs53 = c(3, 5, 4), svs54 = c(1, 2, 3), svs55 = c(4, 5, 1), svs56 = c(2, 3, 4),
-#'   svs57 = c(5, 1, 2)
-#' ),
+#'   svs57 = c(5, 1, 2)),
 #' correction = TRUE,
 #' compute = "all",
 #' na.rm = TRUE)
@@ -72,7 +86,7 @@ svs <- function(df, items = NULL, compute = "all", correction = TRUE, na.rm = TR
     stop("Data frame must contain all specified items.")
   }
 
-  if (!(compute %in% c("all", "ten.values", "four.higher", "two.foci", "two.dynamics"))) {
+  if (!(compute %in% c("all", "ten.values", "four.higher", "two.foci", "two.anxiety"))) {
     stop("Invalid value for the compute parameter.")
   }
 
@@ -114,13 +128,13 @@ svs <- function(df, items = NULL, compute = "all", correction = TRUE, na.rm = TR
   }
 
   if (compute == "all" || compute == "two.foci") {
-    values_df$FOC_individ <- rowMeans(values_df[, c("val_hedonism", "val_stimulation", "val_selfdirection", "val_achievement", "val_power")], na.rm = na.rm)
-    values_df$FOC_collett <- rowMeans(values_df[, c("val_benevolence", "val_universalism", "val_security", "val_conformity", "val_tradition")], na.rm = na.rm)
+    values_df$FOC_self <- rowMeans(values_df[, c("val_hedonism", "val_stimulation", "val_selfdirection", "val_achievement", "val_power")], na.rm = na.rm)
+    values_df$FOC_other <- rowMeans(values_df[, c("val_benevolence", "val_universalism", "val_security", "val_conformity", "val_tradition")], na.rm = na.rm)
   }
 
-  if (compute == "all" || compute == "two.dynamics") {
-    values_df$DYN_growth <- rowMeans(values_df[, c("val_hedonism", "val_stimulation", "val_selfdirection", "val_universalism", "val_benevolence")], na.rm = na.rm)
-    values_df$DYN_protect <- rowMeans(values_df[, c("val_achievement", "val_power", "val_security", "val_conformity", "val_tradition")], na.rm = na.rm)
+  if (compute == "all" || compute == "two.anxiety") {
+    values_df$ANX_growth <- rowMeans(values_df[, c("val_hedonism", "val_stimulation", "val_selfdirection", "val_universalism", "val_benevolence")], na.rm = na.rm)
+    values_df$ANX_protect <- rowMeans(values_df[, c("val_achievement", "val_power", "val_security", "val_conformity", "val_tradition")], na.rm = na.rm)
   }
 
   results <- if (compute == "all") {
@@ -128,9 +142,9 @@ svs <- function(df, items = NULL, compute = "all", correction = TRUE, na.rm = TR
   } else if (compute == "four.higher") {
     values_df[, c("VAL_OPENNESS", "VAL_SELFTR", "VAL_CONSERV", "VAL_SELFENH")]
   } else if (compute == "two.foci") {
-    values_df[, c("FOC_individ", "FOC_collett")]
-  } else if (compute == "two.dynamics") {
-    values_df[, c("DYN_growth", "DYN_protect")]
+    values_df[, c("FOC_self", "FOC_other")]
+  } else if (compute == "two.anxiety") {
+    values_df[, c("ANX_growth", "ANX_protect")]
   } else {
     values_df
   }

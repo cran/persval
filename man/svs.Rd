@@ -4,7 +4,13 @@
 \alias{svs}
 \title{Compute personal values from SVS-57 data}
 \usage{
-svs(df, items = NULL, compute = "all", correction = TRUE, na.rm = TRUE)
+svs(
+  df,
+  items = NULL,
+  compute = "all",
+  correction = TRUE,
+  na.rm = TRUE
+)
 }
 \arguments{
 \item{df}{A data frame containing the raw responses for the SVS items.
@@ -16,8 +22,14 @@ to the SVS items. Must be exactly 57 items. If NULL, the function assumes the it
 are the only columns given in the "df" parameter.}
 
 \item{compute}{Character. Indicates which personal values scores to compute and return.
-Possible values are "all" (default), "ten.values", "four.higher", "two.foci",
-or "two.dynamics".}
+Possible values are "all" (default; computes all first and second-order personal values scores),
+"ten.values" (computes the ten basic personal values scores),
+ "four.higher" (computes the four main higher-order values scores),
+ "two.foci" (computes two higher-order values scores: self-focused values that regulate personal interests and characteristics, and
+    other-focused values that regulate social relationships),
+    "two.anxiety" (computes two higher-order values based on their relation to anxiety:
+    self-protective values aimed at coping with anxiety due to uncertainty in the social and physical world, and
+    growth-oriented or self-expansive values that express anxiety-free motivations).}
 
 \item{correction}{Logical. When TRUE, the scores are corrected for individual differences
 in the use of the response scale. Default is TRUE.}
@@ -34,7 +46,7 @@ This function computes personal values scores and different higher-order
 dimensions related to Schwartz's theoretical framework based on the 57 items
 of the Schwartz Value Survey (Schwartz, 1992).
 By default, the function applies the recommended statistical adjustment
-(individual MRAT centering) as suggested by the authors, to correct for
+(MRAT centering) as suggested by the authors, to correct for
 individual differences in response styles thus enhancing the interpretative
 validity of the scores.
 }
@@ -58,8 +70,7 @@ persval::svs(df = data.frame(
   svs45 = c(3, 2, 4), svs46 = c(1, 5, 3), svs47 = c(4, 3, 2), svs48 = c(5, 1, 2),
   svs49 = c(3, 4, 1), svs50 = c(2, 5, NA), svs51 = c(1, 4, 3), svs52 = c(2, 1, 5),
   svs53 = c(3, 5, 4), svs54 = c(1, 2, 3), svs55 = c(4, 5, 1), svs56 = c(2, 3, 4),
-  svs57 = c(5, 1, 2)
-),
+  svs57 = c(5, 1, 2)),
 correction = TRUE,
 compute = "all",
 na.rm = TRUE)

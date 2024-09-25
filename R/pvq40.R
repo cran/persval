@@ -4,14 +4,31 @@
 #' dimensions related to Schwartz's theoretical framework based on the 40 items
 #' of the PVQ-40 Value Scale (Schwartz, 2006; Schwartz et al., 2001).
 #' By default, the function applies the recommended statistical adjustment
-#' (individual MRAT centering) as suggested by the authors, to correct for
+#' (MRAT centering) as suggested by the authors, to correct for
 #' individual differences in response styles thus enhancing the interpretative
 #' validity of the scores.
+#'
+#' @usage
+#' pvq40(
+#'   df,
+#'   items = NULL,
+#'   compute = "all",
+#'   correction = TRUE,
+#'   na.rm = TRUE
+#' )
 #'
 #' @param df A Data frame containing the raw responses for the 40 PVQ items. If "items" is not provided, it must have exactly 40 columns, and their order must correspond to the PVQ-40 items.
 #' @param items An optional vector containing the names or indices of the columns that correspond to the PVQ-40 items. Must be exactly 40 items. If NULL, the function assumes the items are the only columns given in the "df" parameter.
 #' @param correction Logical. When TRUE, the scores are corrected for individual differences in the use of the response scale. Default is TRUE.
-#' @param compute Character. Indicates which personal values scores to compute and return. Possible values are "all" (default), "ten.values", "four.higher", "two.foci", or "two.dynamics".
+#' @param compute Character. Indicates which personal values scores to compute and return.
+#'                Possible values are "all" (default; computes all first and second-order personal values scores),
+#'                "ten.values" (computes the ten basic personal values scores),
+#'                 "four.higher" (computes the four main higher-order values scores),
+#'                 "two.foci" (computes two higher-order values scores: self-focused values that regulate personal interests and characteristics, and
+#'                    other-focused values that regulate social relationships),
+#'                    "two.anxiety" (computes two higher-order values based on their relation to anxiety:
+#'                    self-protective values aimed at coping with anxiety due to uncertainty in the social and physical world, and
+#'                    growth-oriented or self-expansive values that express anxiety-free motivations).
 #' @param na.rm Logical. When TRUE, NAs are ignored in calculations; when FALSE, NAs are preserved and will affect calculations. Default is TRUE.
 #'
 #' @return A data frame with computed values. If both "df" and "items" parameters are provided, the returned data frame includes the original data with the calculations appended as new columns.
@@ -28,8 +45,7 @@
 #' pvq25 = c(4, 2, 5), pvq26 = c(1, 3, 2), pvq27 = c(5, 4, 1), pvq28 = c(2, 1, 4),
 #' pvq29 = c(3, 5, 2), pvq30 = c(1, 4, 3), pvq31 = c(2, 3, 5), pvq32 = c(4, 1, NA),
 #' pvq33 = c(3, 5, 4), pvq34 = c(1, 2, 3), pvq35 = c(4, 1, 5), pvq36 = c(2, 3, 4),
-#' pvq37 = c(5, 2, 1), pvq38 = c(4, 3, 2), pvq39 = c(1, 5, 3), pvq40 = c(2, 4, 1)
-#' ),
+#' pvq37 = c(5, 2, 1), pvq38 = c(4, 3, 2), pvq39 = c(1, 5, 3), pvq40 = c(2, 4, 1)),
 #' correction = TRUE,
 #' compute = "all",
 #' na.rm = TRUE)
@@ -57,7 +73,7 @@ pvq40 <- function(df, items = NULL, compute = "all", correction = TRUE, na.rm = 
     stop("Data frame must contain all specified items.")
   }
 
-  if (!(compute %in% c("all", "ten.values", "four.higher", "two.foci", "two.dynamics"))) {
+  if (!(compute %in% c("all", "ten.values", "four.higher", "two.foci", "two.anxiety"))) {
     stop("Invalid value for the compute parameter.")
   }
 
@@ -101,13 +117,13 @@ pvq40 <- function(df, items = NULL, compute = "all", correction = TRUE, na.rm = 
   }
 
   if (compute == "all" || compute == "two.foci") {
-    values_df$FOC_individ <- rowMeans(values_df[, c("val_hedonism", "val_stimulation", "val_selfdirection", "val_achievement", "val_power")], na.rm = na.rm)
-    values_df$FOC_collett <- rowMeans(values_df[, c("val_benevolence", "val_universalism", "val_security", "val_conformity", "val_tradition")], na.rm = na.rm)
+    values_df$FOC_self <- rowMeans(values_df[, c("val_hedonism", "val_stimulation", "val_selfdirection", "val_achievement", "val_power")], na.rm = na.rm)
+    values_df$FOC_other <- rowMeans(values_df[, c("val_benevolence", "val_universalism", "val_security", "val_conformity", "val_tradition")], na.rm = na.rm)
   }
 
-  if (compute == "all" || compute == "two.dynamics") {
-    values_df$DYN_growth <- rowMeans(values_df[, c("val_hedonism", "val_stimulation", "val_selfdirection", "val_universalism", "val_benevolence")], na.rm = na.rm)
-    values_df$DYN_protect <- rowMeans(values_df[, c("val_achievement", "val_power", "val_security", "val_conformity", "val_tradition")], na.rm = na.rm)
+  if (compute == "all" || compute == "two.anxiety") {
+    values_df$ANX_growth <- rowMeans(values_df[, c("val_hedonism", "val_stimulation", "val_selfdirection", "val_universalism", "val_benevolence")], na.rm = na.rm)
+    values_df$ANX_protect <- rowMeans(values_df[, c("val_achievement", "val_power", "val_security", "val_conformity", "val_tradition")], na.rm = na.rm)
   }
 
   results <- if (compute == "all") {
@@ -115,9 +131,9 @@ pvq40 <- function(df, items = NULL, compute = "all", correction = TRUE, na.rm = 
   } else if (compute == "four.higher") {
     values_df[, c("VAL_OPENNESS", "VAL_SELFTR", "VAL_CONSERV", "VAL_SELFENH")]
   } else if (compute == "two.foci") {
-    values_df[, c("FOC_individ", "FOC_collett")]
-  } else if (compute == "two.dynamics") {
-    values_df[, c("DYN_growth", "DYN_protect")]
+    values_df[, c("FOC_self", "FOC_other")]
+  } else if (compute == "two.anxiety") {
+    values_df[, c("ANX_growth", "ANX_protect")]
   } else {
     values_df
   }

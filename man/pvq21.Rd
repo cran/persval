@@ -4,14 +4,28 @@
 \alias{pvq21}
 \title{Compute personal values from PVQ-21/ESS21 data}
 \usage{
-pvq21(df, items = NULL, compute = "all", correction = TRUE, na.rm = TRUE)
+pvq21(
+  df,
+  items = NULL,
+  compute = "all",
+  correction = TRUE,
+  na.rm = TRUE
+)
 }
 \arguments{
 \item{df}{A Data frame containing the raw responses for the 21 PVQ items. If "items" is not provided, it must have exactly 21 columns, and their order must correspond to the PVQ-21 items.}
 
 \item{items}{An optional vector containing the names or indices of the columns that correspond to the PVQ-21 items. Must be exactly 21 items. If NULL, the function assumes the items are the only columns given in the "df" parameter.}
 
-\item{compute}{Character. Indicates which personal values scores to compute and return. Possible values are "all" (default), "ten.values", "four.higher", "two.foci", or "two.dynamics".}
+\item{compute}{Character. Indicates which personal values scores to compute and return.
+Possible values are "all" (default; computes all first and second-order personal values scores),
+"ten.values" (computes the ten basic personal values scores),
+ "four.higher" (computes the four main higher-order values scores),
+ "two.foci" (computes two higher-order values scores: self-focused values that regulate personal interests and characteristics, and
+    other-focused values that regulate social relationships),
+    "two.anxiety" (computes two higher-order values based on their relation to anxiety:
+    self-protective values aimed at coping with anxiety due to uncertainty in the social and physical world, and
+    growth-oriented or self-expansive values that express anxiety-free motivations).}
 
 \item{correction}{Logical. When TRUE, the scores are corrected for individual differences in the use of the response scale. Default is TRUE.}
 
@@ -25,7 +39,7 @@ This function computes personal values scores and different higher-order
 dimensions related to Schwartz's theoretical framework based on the 21 items
 of the PVQ-21 European Social Survey Value Scale (Schwartz, 2003).
 By default, the function applies the recommended statistical adjustment
-(individual MRAT centering) as suggested by the authors, to correct for
+(MRAT centering) as suggested by the authors, to correct for
 individual differences in response styles thus enhancing the interpretative
 validity of the scores.
 }
@@ -39,8 +53,7 @@ pvq5 = c(5, 2, 1), pvq6 = c(3, 4, 2), pvq7 = c(1, 2, 4), pvq8 = c(3, 1, 5),
 pvq9 = c(2, 4, 1), pvq10 = c(5, 3, 2), pvq11 = c(1, 4, 3), pvq12 = c(2, 1, 5),
 pvq13 = c(3, 5, 4), pvq14 = c(1, 2, 3), pvq15 = c(4, 5, 1), pvq16 = c(2, 3, 4),
 pvq17 = c(5, 1, 2), pvq18 = c(3, 4, 1), pvq19 = c(2, 3, NA), pvq20 = c(1, 3, 4),
-pvq21 = c(2, 5, 1)
-),
+pvq21 = c(2, 5, 1)),
 correction = TRUE,
 compute = "all",
 na.rm = TRUE)

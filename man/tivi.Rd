@@ -4,7 +4,13 @@
 \alias{tivi}
 \title{Compute personal values from TIVI data}
 \usage{
-tivi(df, items = NULL, compute = "all", correction = TRUE, na.rm = TRUE)
+tivi(
+  df,
+  items = NULL,
+  compute = "all",
+  correction = TRUE,
+  na.rm = TRUE
+)
 }
 \arguments{
 \item{df}{A data frame containing the raw responses for the 10 TIVI items.
@@ -16,8 +22,14 @@ that correspond to the TIVI items. Must be exactly 10 items. If NULL,
 the function assumes the items are the only columns given in the "df" parameter.}
 
 \item{compute}{Character. Indicates which personal values scores to compute and return.
-Possible values are "all" (default), "ten.values", "four.higher", "two.foci",
-or "two.dynamics".}
+Possible values are "all" (default; computes all first and second-order personal values scores),
+"ten.values" (computes the ten basic personal values scores),
+ "four.higher" (computes the four main higher-order values scores),
+ "two.foci" (computes two higher-order values scores: self-focused values that regulate personal interests and characteristics, and
+    other-focused values that regulate social relationships),
+    "two.anxiety" (computes two higher-order values based on their relation to anxiety:
+    self-protective values aimed at coping with anxiety due to uncertainty in the social and physical world, and
+    growth-oriented or self-expansive values that express anxiety-free motivations).}
 
 \item{correction}{Logical. When TRUE, the scores are corrected for individual differences
 in the use of the response scale. Default is TRUE.}
@@ -35,7 +47,7 @@ This function computes personal values scores and different higher-order
 dimensions related to Schwartz's theoretical framework based on the 10 items
 of the ultra-brief TIVI Questionnaire (Sandy et al., 2017).
 By default, the function applies the recommended statistical adjustment
-(individual MRAT centering) as suggested by the authors, to correct for
+(MRAT centering) as suggested by the authors, to correct for
 individual differences in response styles thus enhancing the interpretative
 validity of the scores.
 }
@@ -47,8 +59,7 @@ Developed by Giuseppe Corbelli, email: giuseppe.corbelli@uninettunouniversity.ne
 persval::tivi(df = data.frame(
 tivi1 = c(3, 1, 4), tivi2 = c(2, 5, 3), tivi3 = c(1, 5, 2),
 tivi4 = c(4, 3, 5), tivi5 = c(5, 2, 1), tivi6 = c(3, 4, 2), tivi7 = c(1, 2, 4),
-tivi8 = c(3, 1, 5), tivi9 = c(2, 4, 1), tivi10 = c(5, 3, 2)
-),
+tivi8 = c(3, 1, 5), tivi9 = c(2, 4, 1), tivi10 = c(5, 3, 2)),
 correction = TRUE,
 compute = "all",
 na.rm = TRUE)

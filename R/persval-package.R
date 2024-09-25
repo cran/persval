@@ -1,26 +1,36 @@
-#' Computing Personal Values Scores
+#' Computing and visualizing Schwartz's Personal Values
 #'
-#' The persval package provides functions to compute personal values scores
+#' The persval package provides functions for computing personal values scores
 #' from various questionnaires based on the theoretical constructs proposed by
 #' Schwartz (Schwartz, 1992, 1996, 2015; Schwartz et al., 2017).
-#' Designed for researchers and practitioners in psychology,
+#' Designed to assist researchers and practitioners in psychology,
 #' sociology, and related fields, the package facilitates the quantification
-#' of different dimensions related to personal values from survey data.
-#' It incorporates the recommended statistical adjustment to enhance
-#' the accuracy and interpretation of the results.
+#' of different dimensions related to personal values from survey data and the
+#' graphical representation of their relative importance.
+#' It incorporates the recommended statistical adjustment (ipsatization) to
+#' enhance the accuracy and interpretation of the results.
 #'
 #' Supported questionnaires within the package include:
 #' \itemize{
-#'   \item \code{\link{svs}}: SVS-57, the Schwartz Value Survey with 57 items (Schwartz, 1992).
-#'   \item \code{\link{pvq40}}: PVQ-40, the Portrait Values Questionnaire with 40 items (Schwartz, 2006; Schwartz et al., 2001).
-#'   \item \code{\link{pvq21}}: PVQ-21/ESS-21, the shortened version of PVQ used in the European Social Survey (Schwartz, 2003).
-#'   \item \code{\link{twivi}}: TwIVI, the Twenty Item Values Inventory (Sandy et al., 2017).
-#'   \item \code{\link{tivi}}: TIVI, the Ten Item Values Inventory (Sandy et al., 2017).
+#'   \item \code{\link{svs}}: the Schwartz Value Survey (SVS-57), comprising 57 items measured on a 9-point Likert-type scale, ranging from -1 to 7 (Schwartz, 1992).
+#'   \item \code{\link{pvq40}}: the Portrait Values Questionnaire (PVQ-40), comprising 40 items measured on a 6-point Likert scale, ranging from 1 to 6 (Schwartz, 2006; Schwartz et al., 2001).
+#'   \item \code{\link{pvq21}}: the shortened version of PVQ used in the European Social Survey (PVQ-21/ESS-21), comprising 21 items measured on a 6-point Likert scale, ranging from 1 to 6 (Schwartz, 2003).
+#'   \item \code{\link{twivi}}: the Twenty Item Values Inventory (TwIVI), comprising 20 items measured on a 6-point Likert scale, ranging from 1 to 6 (Sandy et al., 2017).
+#'   \item \code{\link{tivi}}: the Ten Item Values Inventory (TIVI), comprising 10 items measured on a 6-point Likert scale, ranging from 1 to 6 (Sandy et al., 2017).
+#' }
+#'
+#' The package includes functions to generate spider charts that graphically
+#' depict the relative importance of each of the ten basic personal values and
+#' the four higher order values, making it easier to present, interpret, and
+#' confront visually an individual's or group's value orientation:
+#' \itemize{
+#'   \item \code{\link{tenvalplot}}: Function to plot spider charts for ten basic personal values.
+#'   \item \code{\link{fourvalplot}}: Function to plot spider charts for four higher order personal values.
 #' }
 #'
 #' @section Note:
 #' This package is independently developed based on Schwartz’s theoretical framework and is not
-#' directly endorsed by Professor Schwartz. Researchers are advised to consult the original empirical
+#' directly endorsed by Professor Schwartz. Researchers are advised to consult the original
 #' studies and validation articles for comprehensive insights into the theoretical and empirical basis
 #' of the instruments used (e.g.: Closs, 1996; Cornwell & Dunlop, 1994; Rudnev, 2021;
 #' Saris, 1988; Schwartz, 1992, 1996, 2015; Schwartz et al., 2017; Smith, 2004;
