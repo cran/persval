@@ -29,12 +29,18 @@
 #' }
 #'
 #' @section Note:
-#' This package is independently developed based on Schwartz’s theoretical framework and is not
-#' directly endorsed by Professor Schwartz. Researchers are advised to consult the original
-#' studies and validation articles for comprehensive insights into the theoretical and empirical basis
-#' of the instruments used (e.g.: Closs, 1996; Cornwell & Dunlop, 1994; Rudnev, 2021;
-#' Saris, 1988; Schwartz, 1992, 1996, 2015; Schwartz et al., 2017; Smith, 2004;
-#' Van Rosmalen et al., 2010).
+#' This package was independently developed based on Schwartz's theoretical framework and
+#' was also informed by the broader literature on human values, including work by Michele
+#' Vecchione, Guido Alessandri, and others. This software is provided "as is", without
+#' any express or implied warranties of accuracy or reliability. Researchers should
+#' consult the original studies and validation articles for comprehensive insights
+#' into the theoretical and empirical basis of the instruments used (e.g.,
+#' Closs, 1996; Cornwell & Dunlop, 1994; Rudnev, 2021; Saris, 1988; Schwartz,
+#' 1992, 1996, 2015; Schwartz et al., 2017; Smith, 2004; Van Rosmalen et al., 2010).
+#' For suggestions or to report issues, please contact the author.
+#'
+#' @author
+#' Giuseppe Corbelli (<giuseppe.corbelli@uniroma1.it>)
 #'
 #' @references
 #' Closs, S. J. (1996). On the factoring and interpretation of ipsative data. \emph{Journal of Occupational and Organizational Psychology}, 69(1), 41-47. doi:10.1111/j.2044-8325.1996.tb00598.x
